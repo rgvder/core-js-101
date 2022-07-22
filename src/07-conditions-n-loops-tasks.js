@@ -27,8 +27,20 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 3 === 0 && num % 5 === 0) {
+    return 'FizzBuzz';
+  }
+
+  if (num % 3 === 0) {
+    return 'Fizz';
+  }
+
+  if (num % 5 === 0) {
+    return 'Buzz';
+  }
+
+  return num;
 }
 
 
@@ -43,8 +55,8 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  return n ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -60,8 +72,8 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  return (n2 - n1 + 1) * ((n1 + n2) / 2);
 }
 
 
@@ -72,7 +84,7 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  * @param {number} a
  * @param {number} b
  * @param {number} c
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   1,2,3    =>  false
@@ -80,8 +92,8 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  return a + b > c && a + c > b && c + b > a;
 }
 
 
@@ -225,8 +237,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return +num.toString().split('').reverse().join('');
 }
 
 
@@ -259,7 +271,7 @@ function isCreditCardNumber(/* ccn */) {
  *   step1 : find sum of all digits
  *   step2 : if sum > 9 then goto step1 otherwise return the sum
  *
- * @param {number} n
+ * @param {number} num
  * @return {number}
  *
  * @example:
@@ -268,8 +280,12 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  if (num <= 9) {
+    return num;
+  }
+
+  return getDigitalRoot(num.toString().split('').reduce((sum, number) => sum + +number, 0));
 }
 
 
@@ -294,8 +310,41 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const openBrackets = ['(', '{', '[', '<'];
+  const bracketsPair = {
+    ')': '(',
+    '}': '{',
+    ']': '[',
+    '>': '<',
+  };
+
+  if (str.length === 0) {
+    return true;
+  }
+
+  const array = str.split('').reduce((array2, item) => {
+    if (openBrackets.includes(item)) {
+      array2.push(item);
+    } else {
+      const top = array2[array2.length - 1];
+
+      if (bracketsPair[item] === top) {
+        array2.pop();
+      } else {
+        array2.push(item);
+        return array2;
+      }
+
+      if (array2.length === 0) {
+        return array2;
+      }
+    }
+
+    return array2;
+  }, []);
+
+  return array.length === 0;
 }
 
 
@@ -319,8 +368,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 

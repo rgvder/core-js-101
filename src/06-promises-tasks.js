@@ -14,7 +14,7 @@
  * if is not boolean value passed
  *
  * @param {boolean} isPositiveAnswer
- * @return {Promise}
+ * @return {function(): Promise<unknown>}
  *
  * @example
  *    const p1 = willYouMarryMe(true);
@@ -28,8 +28,14 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
+function willYouMarryMe(isPositiveAnswer) {
+  return new Promise((resolve, reject) => {
+    if (typeof isPositiveAnswer !== 'boolean') {
+      reject(new Error('Wrong parameter is passed! Ask her again.'));
+    }
+
+    resolve(isPositiveAnswer ? 'Hooray!!! She said "Yes"!' : 'Oh no, she said "No".');
+  });
 }
 
 
