@@ -77,7 +77,7 @@ function getPolynom(...args) {
     }
 
     return args[0] * x ** 2 + args[1] * x + args[2];
-  }
+  };
 }
 
 
